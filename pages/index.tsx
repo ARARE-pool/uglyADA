@@ -282,7 +282,7 @@ async function buildTx() {
             </span>  
             </div>
             <button type="button" class="bn632-hover bn19" style={{}} onClick={async () => buildTx() }>Build Tx</button>
-            <br /><br />
+            <br/><br/>
             
             
             
