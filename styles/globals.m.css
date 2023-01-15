@@ -209,6 +209,11 @@ button.mr-wallet-button {
   border-radius: .4em;
 }
 
+.EGDgF:hover{
+  background-color: #FFF65B;
+  transition: background .3s 0.1s;
+  border-radius: .4em;
+}
 
 
 /*  Headers   */
