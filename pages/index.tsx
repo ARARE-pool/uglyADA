@@ -280,7 +280,7 @@ async function buildTx() {
             </span>  
             </div>
             <br/> <br/>
-            <button type="button" style={{}} onClick={async () => buildTx() }>Build Tx</button>
+            <button type="button" class="bn632-hover bn19" style={{}} onClick={async () => buildTx() }>Build Tx</button>
             <br /><br />
             
             
@@ -292,7 +292,7 @@ async function buildTx() {
               <label for="file"> Select csv file</label>
             </div>
             <br />
-            <button type="button" style={{}} onClick={async () => buildTxCSV() }>Build Tx CSV file</button>
+            <button type="button" class="bn632-hover bn19" style={{}} onClick={async () => buildTxCSV() }>Build Tx CSV file</button>
             <br />
             <br></br><h1>Verify functions</h1>
             <button type="button" style={{}} onClick={async () => verifySign() }>Verify Sign</button>
