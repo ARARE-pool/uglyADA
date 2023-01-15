@@ -261,7 +261,7 @@ async function buildTx() {
             <input type="number" id="lovelace" onChange={handleChangeLovelace}></input><br/>
             <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => buildTx() }>Build Tx</button>
             <br /><br />
-            <h1>Send multi : Upload CSV (Address:lovelace)</h1>
+            <h1>Send multi :</h1><h2> Upload CSV (Address:lovelace)</h2> 
             <input type="file" onChange={handleUpload} />
             <br />
             <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => buildTxCSV() }>Build Tx CSV file</button>
