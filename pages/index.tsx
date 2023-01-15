@@ -9,6 +9,7 @@ import { BlockfrostProvider } from '@meshsdk/core';
 import Papa from 'papaparse';
 import verifyDataSignature from '@cardano-foundation/cardano-verify-datasignature'
 import { utils, address } from '@stricahq/typhonjs';
+import Script from 'next/script'
 
 // import {expect, jest, test} from '@jest/globals';
 
@@ -144,7 +145,8 @@ async function buildTx() {
 
   const handleUpload = (e:any) => {
     let file = e.target.files[0];
-
+    console.log(file.name)
+    var placeHo =  document.getElementById('filePlaceHo').setAttribute("data-text", file.name);
     Papa.parse(file, {
       header: false,
       complete: (results) => {
@@ -227,6 +229,7 @@ async function buildTx() {
       console.log(boole)
     }
 
+    
 
   return (
 <div id="cent">
@@ -239,6 +242,7 @@ async function buildTx() {
             <pre>
               <code className="language-js">
                 {JSON.stringify(getWalletBalance())}
+                
               </code>
             </pre>
           ) : (
@@ -261,7 +265,8 @@ async function buildTx() {
             <button type="button" id="button" style={{}} onClick={async () => stakeWallettoARARE() }>Stake to ARARE</button>
             <button type="button" id="button" style={{}} onClick={async () => getRegStatus('stake_test1up9vfd6tgyudjrajnz7ys289l0mu5udfe0d6pxsw6d6zhuglxqx70') }>Reg status</button>
             <br></br>
-            <br></br><h1>Send lovelace to an Address</h1>
+            <br></br>
+            <h1>Send lovelace to an Address</h1>
             <div className="h3">
             <h3>Address: {addressInput}</h3>
             
@@ -269,13 +274,10 @@ async function buildTx() {
             <input type="text" id="addressInput" placeholder="addr..." onChange={handleChangeAddress} />
             <span></span>
             </span>
-           
-            <br/>
-            
+
             <h3>Lovelace: {lovelaceada}</h3>
-            
             <span className="input">
-              <input type="number" id="lovelace" placeholder="1000000 MIN" onChange={handleChangeLovelace}></input>
+              <input type="number" id="lovelace" placeholder="1000000 lovelace" onChange={handleChangeLovelace}></input>
               <span></span>
             </span>  
             </div>
@@ -287,10 +289,16 @@ async function buildTx() {
             
             <h1>Send multi :</h1>
             <h2> Upload CSV (Address:lovelace)</h2> 
-            <div class="file-input">
+            {/* <div class="file-input">
               <input type="file" id="file" class="file" onChange={handleUpload} />
               <label for="file"> Select csv file</label>
             </div>
+            <br/> */}
+            <form class="form">
+              <div id="filePlaceHo" class="file-upload-wrapper" data-text="Select your file!" >
+                <input name="file-upload-field" type="file" class="file-upload-field" value=""  onChange={handleUpload}/>
+              </div>
+            </form>
             <br />
             <button type="button" class="bn632-hover bn19" style={{}} onClick={async () => buildTxCSV() }>Build Tx CSV file</button>
             <br />
