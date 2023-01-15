@@ -5,12 +5,19 @@ html {
 	display: flex;
 }
 
+
+
 body {
 	position: relative;
 	margin: auto;
 	background: #181620;
 	perspective: 500px;
 }
+
+#cent{
+  width:100%;
+}
+
 
 
 /* .rotate {
@@ -222,6 +229,20 @@ h2 {
   -webkit-background-clip: text;
 }
 
+h3{
+  font-size: 20px;
+  font-weight: 600;
+  max-width:50%;
+  background-image: linear-gradient(to left, #553c9a, #b393d3);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.h3{
+ width:50em;
+}
+
 p {
   font-size: 20px;
   font-weight: 600;
@@ -231,14 +252,8 @@ p {
   -webkit-background-clip: text;
 }
 
-h3{
-  font-size: 12px;
-  font-weight: 600;
-  background-image: linear-gradient(to left, #553c9a, #b393d3);
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-}
+
+
 
 /*  csv input button  */
 .file {
@@ -247,13 +262,13 @@ h3{
   height: 0.1px;
   position: absolute;
 }
-
+/* 
 .file-input {
   
-}
+} */
 
 .file-input label {
-  display: block;
+  display: inline;
 	position: relative;
 	margin: 0.5em 0;
 	padding: .8em 2.2em;
@@ -344,7 +359,7 @@ h3{
 }
 
 
-
+table { width: 100%; }
 /*  input text style */
 
 

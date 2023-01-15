@@ -229,7 +229,7 @@ async function buildTx() {
 
 
   return (
-<div>
+<div id="cent">
       <h1>Connect Wallet</h1>
        <CardanoWallet />
      {connected && (
@@ -244,34 +244,47 @@ async function buildTx() {
           ) : (
               <main>
                 <div className="rotate">
-            <button type="button" style={{}} onClick={async () => getWalletBalance() }>Get Balance</button>
-            <button type="button" style={{}} onClick={async () => getWalletUtxos() }>Get Utxos</button>
-            <button type="button" style={{}} onClick={async () => signWalletData() }>Sign Data</button>
+                  
+            
+              <button type="button" style={{}} onClick={async () => getWalletBalance() }>Get Balance</button>
+              <button type="button" style={{}} onClick={async () => getWalletUtxos() }>Get Utxos</button>
+              <button type="button" style={{}} onClick={async () => signWalletData() }>Sign Data</button>
+            
+            
             <button type="button" style={{}} onClick={async () => signWalletTx() }>Sign Tx</button>
             <button type="button" style={{}} onClick={async () => submitWalletTx() }>Submit Tx</button>
             <button type="button" id="button" style={{}} onClick={async () => submitNsignWalletTx() }>Sign and Submit Tx</button>
+            
+            
             </div>
             <br></br><br></br><h1>Stake to ARARE (preprod)</h1>
             <button type="button" id="button" style={{}} onClick={async () => stakeWallettoARARE() }>Stake to ARARE</button>
             <button type="button" id="button" style={{}} onClick={async () => getRegStatus('stake_test1up9vfd6tgyudjrajnz7ys289l0mu5udfe0d6pxsw6d6zhuglxqx70') }>Reg status</button>
             <br></br>
             <br></br><h1>Send lovelace to an Address</h1>
-            <p>Address: <h3>{addressInput}</h3></p>
+            <div className="h3">
+            <h3>Address: {addressInput}</h3>
             
             <span className="input">
             <input type="text" id="addressInput" placeholder="addr..." onChange={handleChangeAddress} />
             <span></span>
             </span>
            
-            <br/>  
-            <p>Lovelace: {lovelaceada}</p>
+            <br/>
+            
+            <h3>Lovelace: {lovelaceada}</h3>
+            
             <span className="input">
               <input type="number" id="lovelace" placeholder="1000000 MIN" onChange={handleChangeLovelace}></input>
               <span></span>
             </span>  
+            </div>
             <br/> <br/>
             <button type="button" style={{}} onClick={async () => buildTx() }>Build Tx</button>
             <br /><br />
+            
+            
+            
             <h1>Send multi :</h1>
             <h2> Upload CSV (Address:lovelace)</h2> 
             <div class="file-input">
