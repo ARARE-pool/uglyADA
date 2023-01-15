@@ -15,7 +15,7 @@ export default function Page() {
   //const verifyDataSignature = require('@cardano-foundation/cardano-verify-datasignature');
   const blockchainProvider = new BlockfrostProvider('preprodJKAacXeas0VtjmaBzen0UEhvLbnVzJnF');
   const [addressInput,setAddress] = useState("");
-  const [lovelaceada,setLovelaceAda] = useState<string>();
+  const [lovelaceada,setLovelaceAda] = useState<any>(null);
   const { connected, wallet } = useWallet();
   const [assets, setAssets] = useState<null | any>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -91,7 +91,7 @@ export default function Page() {
     console.log('submitTx : ', JSON.stringify(txHash, null, 2))
   }
 
-  async function getRegStatus(reg){
+  async function getRegStatus(reg: any){
     const regBool = await blockchainProvider.fetchAccountInfo(reg)
     console.log('reg status from function : ', regBool.active)
     return regBool.active
@@ -117,11 +117,11 @@ export default function Page() {
       console.log('submitTx : ', JSON.stringify(txHash, null, 2))
   }
 
-  function handleChangeAddress(e) {
+  function handleChangeAddress(e:any) {
     setAddress(e.target.value);
   }
 
-  function handleChangeLovelace(e) {
+  function handleChangeLovelace(e:any) {
     setLovelaceAda(e.target.value);
   }
   
@@ -141,18 +141,19 @@ async function buildTx() {
 
   const [data, setData] = useState([]);
 
-  const handleUpload = (e) => {
+  const handleUpload = (e:any) => {
     let file = e.target.files[0];
 
     Papa.parse(file, {
       header: false,
       complete: (results) => {
-        setData(results.data);
+        const resutlsData:any = results.data
+        setData(resutlsData);
         console.log(results)
         console.log("Result lenght: ", results.data.length)
         for(let i=0; i<results.data.length; i++){
-          console.log("Address : ", results.data[i][0]); //use i instead of 0
-          console.log("Lovelace : ", results.data[i][1]); //use i instead of 0
+          console.log("Address : ", resutlsData[i][0]); //use i instead of 0
+          console.log("Lovelace : ", resutlsData[i][1]); //use i instead of 0
       }
       }
     });
