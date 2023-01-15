@@ -233,7 +233,7 @@ async function buildTx() {
        <CardanoWallet />
      {connected && (
         <>
-          <h1>Get Wallet Balance</h1>
+          <br/><br/><br/><h1>Wallet functions</h1>
           {assets ? (
             <pre>
               <code className="language-js">
@@ -248,9 +248,11 @@ async function buildTx() {
             <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => signWalletTx() }>Sign Tx</button>
             <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => submitWalletTx() }>Submit Tx</button>
             <button type="button" id="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => submitNsignWalletTx() }>Sign and Submit Tx</button>
+            <br></br><br></br><h1>Stake to ARARE (preprod)</h1>
             <button type="button" id="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => stakeWallettoARARE() }>Stake to ARARE</button>
             <button type="button" id="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => getRegStatus('stake_test1up9vfd6tgyudjrajnz7ys289l0mu5udfe0d6pxsw6d6zhuglxqx70') }>Reg status</button>
             <br></br>
+            <br></br><h1>Send lovelace to an Address</h1>
             <p>Address: {addressInput}</p>
             <input id="addressInput" onChange={handleChangeAddress}></input>
             <br />  
@@ -259,13 +261,14 @@ async function buildTx() {
             <input type="number" id="lovelace" onChange={handleChangeLovelace}></input><br/>
             <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => buildTx() }>Build Tx</button>
             <br /><br />
+            <h1>Send multi : Upload CSV (Address:lovelace)</h1>
             <input type="file" onChange={handleUpload} />
             <br />
             <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => buildTxCSV() }>Build Tx CSV file</button>
             <br />
+            <br></br><h1>Verify functions</h1>
             <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => verifySign() }>Verify Sign</button>
             <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => verifyStake() }>Verify Stake</button>
-            <br />
             <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => verifyBoth() }>Verify Both</button>
             <br />
             </div>
