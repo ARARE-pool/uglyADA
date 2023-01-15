@@ -250,36 +250,35 @@ async function buildTx() {
                 <div className="rotate">
                   
             
-              <button type="button" style={{}} onClick={async () => getWalletBalance() }>Get Balance</button>
-              <button type="button" style={{}} onClick={async () => getWalletUtxos() }>Get Utxos</button>
-              <button type="button" style={{}} onClick={async () => signWalletData() }>Sign Data</button>
+                  <button type="button" style={{}} onClick={async () => getWalletBalance() }>Get Balance</button>
+                  <button type="button" style={{}} onClick={async () => getWalletUtxos() }>Get Utxos</button>
+                  <button type="button" style={{}} onClick={async () => signWalletData() }>Sign Data</button>
+                  <button type="button" style={{}} onClick={async () => signWalletTx() }>Sign Tx</button>
+                  <button type="button" style={{}} onClick={async () => submitWalletTx() }>Submit Tx</button>
+                  <button type="button" id="button" style={{}} onClick={async () => submitNsignWalletTx() }>Sign and Submit Tx</button>
+                  
             
-            
-            <button type="button" style={{}} onClick={async () => signWalletTx() }>Sign Tx</button>
-            <button type="button" style={{}} onClick={async () => submitWalletTx() }>Submit Tx</button>
-            <button type="button" id="button" style={{}} onClick={async () => submitNsignWalletTx() }>Sign and Submit Tx</button>
-            
-            
-            </div>
-            <br></br><br></br><h1>Stake to ARARE (preprod)</h1>
+                </div>
+            <br></br><br></br>
+            <h1>Stake to ARARE (preprod)</h1>
             <button type="button" id="button" style={{}} onClick={async () => stakeWallettoARARE() }>Stake to ARARE</button>
             <button type="button" id="button" style={{}} onClick={async () => getRegStatus('stake_test1up9vfd6tgyudjrajnz7ys289l0mu5udfe0d6pxsw6d6zhuglxqx70') }>Reg status</button>
             <br></br>
             <br></br>
+            
             <h1>Send lovelace to an Address</h1>
             <div className="h3">
-            <h3>Address: {addressInput}</h3>
-            
-            <span className="input">
-            <input type="text" id="addressInput" placeholder="addr..." onChange={handleChangeAddress} />
-            <span></span>
-            </span>
-
-            <h3>Lovelace: {lovelaceada}</h3>
-            <span className="input">
-              <input type="number" id="lovelace" placeholder="1000000 lovelace" onChange={handleChangeLovelace}></input>
+              <h3>Address: {addressInput}</h3>
+              <span className="input">
+              <input type="text" id="addressInput" placeholder="addr..." onChange={handleChangeAddress} />
               <span></span>
-            </span>  
+              </span>
+
+              <h3>Lovelace: {lovelaceada}</h3>
+              <span className="input">
+                <input type="number" id="lovelace" placeholder="1000000 lovelace" onChange={handleChangeLovelace}></input>
+                <span></span>
+              </span>  
             </div>
             <button type="button" class="bn632-hover bn19" style={{}} onClick={async () => buildTx() }>Build Tx</button>
             <br/><br /><br></br>
@@ -288,11 +287,6 @@ async function buildTx() {
             
             <h1>Send multi :</h1>
             <h2> Upload CSV (Address:lovelace)</h2> 
-            {/* <div class="file-input">
-              <input type="file" id="file" class="file" onChange={handleUpload} />
-              <label for="file"> Select csv file</label>
-            </div>
-            <br/> */}
             <form class="form">
               <div id="filePlaceHo" class="file-upload-wrapper" data-text="Select your file!" >
                 <input name="file-upload-field" type="file" class="file-upload-field" value=""  onChange={handleUpload}/>
@@ -301,6 +295,9 @@ async function buildTx() {
             <br />
             <button type="button" class="bn632-hover bn19" style={{}} onClick={async () => buildTxCSV() }>Build Tx CSV file</button>
             <br />
+
+
+
             <br></br><h1>Verify functions</h1>
             <button type="button" style={{}} onClick={async () => verifySign() }>Verify Sign</button>
             <button type="button" style={{}} onClick={async () => verifyStake() }>Verify Stake</button>
