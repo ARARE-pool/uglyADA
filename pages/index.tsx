@@ -9,6 +9,7 @@ import { BlockfrostProvider } from '@meshsdk/core';
 import Papa from 'papaparse';
 import verifyDataSignature from '@cardano-foundation/cardano-verify-datasignature'
 import { utils, address } from '@stricahq/typhonjs';
+
 // import {expect, jest, test} from '@jest/globals';
 
 export default function Page() {
@@ -241,37 +242,52 @@ async function buildTx() {
               </code>
             </pre>
           ) : (
-            <div>
-            <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => getWalletBalance() }>Get Balance</button>
-            <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => getWalletUtxos() }>Get Utxos</button>
-            <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => signWalletData() }>Sign Data</button>
-            <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => signWalletTx() }>Sign Tx</button>
-            <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => submitWalletTx() }>Submit Tx</button>
-            <button type="button" id="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => submitNsignWalletTx() }>Sign and Submit Tx</button>
+              <main>
+                <div className="rotate">
+            <button type="button" style={{}} onClick={async () => getWalletBalance() }>Get Balance</button>
+            <button type="button" style={{}} onClick={async () => getWalletUtxos() }>Get Utxos</button>
+            <button type="button" style={{}} onClick={async () => signWalletData() }>Sign Data</button>
+            <button type="button" style={{}} onClick={async () => signWalletTx() }>Sign Tx</button>
+            <button type="button" style={{}} onClick={async () => submitWalletTx() }>Submit Tx</button>
+            <button type="button" id="button" style={{}} onClick={async () => submitNsignWalletTx() }>Sign and Submit Tx</button>
+            </div>
             <br></br><br></br><h1>Stake to ARARE (preprod)</h1>
-            <button type="button" id="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => stakeWallettoARARE() }>Stake to ARARE</button>
-            <button type="button" id="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => getRegStatus('stake_test1up9vfd6tgyudjrajnz7ys289l0mu5udfe0d6pxsw6d6zhuglxqx70') }>Reg status</button>
+            <button type="button" id="button" style={{}} onClick={async () => stakeWallettoARARE() }>Stake to ARARE</button>
+            <button type="button" id="button" style={{}} onClick={async () => getRegStatus('stake_test1up9vfd6tgyudjrajnz7ys289l0mu5udfe0d6pxsw6d6zhuglxqx70') }>Reg status</button>
             <br></br>
             <br></br><h1>Send lovelace to an Address</h1>
-            <p>Address: {addressInput}</p>
-            <input id="addressInput" onChange={handleChangeAddress}></input>
-            <br />  
+            <p>Address: <h3>{addressInput}</h3></p>
+            
+            <span className="input">
+            <input type="text" id="addressInput" placeholder="addr..." onChange={handleChangeAddress} />
+            <span></span>
+            </span>
+           
+            <br/>  
             <p>Lovelace: {lovelaceada}</p>
-            <br />
-            <input type="number" id="lovelace" onChange={handleChangeLovelace}></input><br/>
-            <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => buildTx() }>Build Tx</button>
+            <span className="input">
+              <input type="number" id="lovelace" placeholder="1000000 MIN" onChange={handleChangeLovelace}></input>
+              <span></span>
+            </span>  
+            <br/> <br/>
+            <button type="button" style={{}} onClick={async () => buildTx() }>Build Tx</button>
             <br /><br />
-            <h1>Send multi :</h1><h2> Upload CSV (Address:lovelace)</h2> 
-            <input type="file" onChange={handleUpload} />
+            <h1>Send multi :</h1>
+            <h2> Upload CSV (Address:lovelace)</h2> 
+            <div class="file-input">
+              <input type="file" id="file" class="file" onChange={handleUpload} />
+              <label for="file"> Select csv file</label>
+            </div>
             <br />
-            <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => buildTxCSV() }>Build Tx CSV file</button>
+            <button type="button" style={{}} onClick={async () => buildTxCSV() }>Build Tx CSV file</button>
             <br />
             <br></br><h1>Verify functions</h1>
-            <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => verifySign() }>Verify Sign</button>
-            <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => verifyStake() }>Verify Stake</button>
-            <button type="button" style={{margin: "8px",backgroundColor: loading ? "orange" : "grey",}} onClick={async () => verifyBoth() }>Verify Both</button>
+            <button type="button" style={{}} onClick={async () => verifySign() }>Verify Sign</button>
+            <button type="button" style={{}} onClick={async () => verifyStake() }>Verify Stake</button>
+            <button type="button" style={{}} onClick={async () => verifyBoth() }>Verify Both</button>
             <br />
-            </div>
+            </main>
+          
           )}
         
         </>

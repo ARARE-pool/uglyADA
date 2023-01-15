@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+// const path = require('path')
 const nextConfig = {
   typescript: {
     // !! WARN !!
@@ -7,11 +8,14 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  // sassOptions: {
+  //   includePaths: [path.join(__dirname, 'styles')],
+  // },
   reactStrictMode: true,
   webpack: function (config, options) {
     config.experiments = {
       asyncWebAssembly: true,
-      layers: true,
+      layers: true, 
     };
     config.module.rules.push({
       test: /\.(ts)x?$/, // Just `tsx?` file only
