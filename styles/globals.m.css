@@ -389,7 +389,7 @@ table { width: 100%; }
   text-align:center;
   border: none;
   background-size: 300% 100%;
-  border-radius: 50px;
+  border-radius: 5px;
   moz-transition: all .4s ease-in-out;
   -o-transition: all .4s ease-in-out;
   -webkit-transition: all .4s ease-in-out;
