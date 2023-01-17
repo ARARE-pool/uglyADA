@@ -92,7 +92,7 @@ button {
 		mix-blend-mode: none;
 		display: block;
 	}
-	
+
 	button:after {
 		background-color: #5D00FF;
 	}
@@ -115,6 +115,21 @@ button {
 		--z: -0.06;
 		animation: translateWobble 2.2s ease forwards;
 	}
+
+  button:active:hover{
+    background-color: #c8c13e;
+    transition: background 0s 0s;
+    
+  } 
+
+  button:active:after{
+    background-color: #26c2a8;
+    mix-blend-mode: color-dodge;
+  }
+  button:active:before{
+    background-color: #b51024;
+  }
+
 
 
 @keyframes rotateAngle {
@@ -220,6 +235,19 @@ button.mr-wallet-button {
   transition: background .3s 0.1s;
   border-radius: .4em;
 }
+
+.EGDgF:active{
+  background-color: #fff75b8f;
+  transition: background 0s;
+  border-radius: .4em;
+}
+
+.cFXwRl:active{
+  background-color: #fff75b8f;
+  transition: background 0s;
+  border-radius: .4em;
+}
+
 
 /*  Headers   */
 h1 {
@@ -358,6 +386,8 @@ p {
   background-color: #FFF65B;
   transition: background .3s 0.1s;
 }
+
+
 
 .file-input label:hover:before {
   --z: 0.04;

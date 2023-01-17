@@ -11,6 +11,9 @@ import verifyDataSignature from '@cardano-foundation/cardano-verify-datasignatur
 import { utils, address } from '@stricahq/typhonjs';
 import Script from 'next/script'
 
+import type { Asset } from '@meshsdk/core';
+// import { MenuItem } from '@meshsdk/react';
+// import tw, { styled } from '@meshsdk/react/src/types/twin';
 // import {expect, jest, test} from '@jest/globals';
 
 export default function Page() {
@@ -18,13 +21,20 @@ export default function Page() {
   const blockchainProvider = new BlockfrostProvider('preprodJKAacXeas0VtjmaBzen0UEhvLbnVzJnF');
   const [addressInput,setAddress] = useState("");
   const [lovelaceada,setLovelaceAda] = useState<any>(null);
+  const [quantity,setQuantity] = useState<any>(null);
   const { connected, wallet } = useWallet();
   const [assets, setAssets] = useState<null | any>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [csvdata,setCsvData] = useState("")
   
+
+
+
+  
   // const [balance, setBalance] = useState<null | any>(null);
+  // const wallets = wallets();
   const wallets = useWalletList();
+
   
   async function getBalance() {
     if (wallet) {
@@ -33,6 +43,7 @@ export default function Page() {
       const _assets = await wallet.getAssets();
       setAssets(_assets);
       setLoading(false);
+      
     }
   }
   
@@ -58,6 +69,8 @@ export default function Page() {
     const _balanceNew = await wallet.getBalance();
     // console.log('wallet : ', wallet)
     console.log('balance', JSON.stringify(_balanceNew, null, 2))
+    // 
+      console.log(wallets)
   }
 
   async function getWalletUtxos() {
@@ -126,6 +139,10 @@ export default function Page() {
   function handleChangeLovelace(e:any) {
     setLovelaceAda(e.target.value);
   }
+
+  function handleChangeQuantity(e:any) {
+    setQuantity(e.target.value);
+  }
   
 async function buildTx() {
   const tx = new Transaction({ initiator: wallet })
@@ -140,6 +157,29 @@ async function buildTx() {
   const txHash = await wallet.submitTx(signedTx);
   console.log('submitnTx: ',JSON.stringify(txHash, null, 2)) 
   }
+
+  async function buildTxToken() {
+    const tx = new Transaction({ initiator: wallet })
+    .sendLovelace(
+      addressInput,
+      "1400000"
+    )
+    .sendAssets(
+      addressInput,
+      [
+        {
+          unit: '9772ff715b691c0444f333ba1db93b055c0864bec48fff92d1f2a7fe5368656e5f746573744d6963726f555344',
+          quantity: quantity
+        }
+      ]
+    )
+    ;
+    const unsignedTx = await tx.build();
+    const signedTx = await wallet.signTx(unsignedTx, false);
+    console.log('signTx: ',JSON.stringify(signedTx, null, 2)) 
+    const txHash = await wallet.submitTx(signedTx);
+    console.log('submitnTx: ',JSON.stringify(txHash, null, 2)) 
+    }
 
   const [data, setData] = useState([]);
 
@@ -284,9 +324,25 @@ async function buildTx() {
             <br/>
             <br/>
             <br/>
-            
-            
-            
+
+            <h1>Send asset to an Address</h1>
+            <div className="h3">
+              <h3>Address: {addressInput}</h3>
+              <span className="input">
+              <input type="text" id="addressInput" placeholder="addr..." onChange={handleChangeAddress} />
+              <span></span>
+              </span>
+
+              <h3>quantity: {quantity}</h3>
+              <span className="input">
+                <input type="number" id="lovelace" placeholder="1 SHEN" onChange={handleChangeQuantity}></input>
+                <span></span>
+              </span>  
+            </div>
+            <button type="button" class="bn632-hover bn19" style={{}} onClick={async () => buildTxToken() }>Build Tx Token</button>
+            <br/>
+            <br/>
+            <br/>
             <h1>Send multi :</h1>
             <h2> Upload CSV (Address:lovelace)</h2> 
             <form class="form">
