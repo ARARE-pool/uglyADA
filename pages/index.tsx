@@ -6,10 +6,13 @@ import { BrowserWallet } from '@meshsdk/core';
 import { Transaction } from '@meshsdk/core';
 import { useWalletList } from '@meshsdk/react';
 import { BlockfrostProvider } from '@meshsdk/core';
+import { KoiosProvider } from '@meshsdk/core';
+import { largestFirst } from '@meshsdk/core';
 import Papa from 'papaparse';
 import verifyDataSignature from '@cardano-foundation/cardano-verify-datasignature'
 import { utils, address } from '@stricahq/typhonjs';
 import Script from 'next/script'
+
 
 import type { Asset } from '@meshsdk/core';
 // import { MenuItem } from '@meshsdk/react';
@@ -19,8 +22,10 @@ import type { Asset } from '@meshsdk/core';
 export default function Page() {
   //const verifyDataSignature = require('@cardano-foundation/cardano-verify-datasignature');
   const blockchainProvider = new BlockfrostProvider('preprodJKAacXeas0VtjmaBzen0UEhvLbnVzJnF');
+  const koiosProvider = new KoiosProvider('preprod');
   const [addressInput,setAddress] = useState("");
   const [lovelaceada,setLovelaceAda] = useState<any>(null);
+  const [signedInput,setSigned] = useState("");
   const [quantity,setQuantity] = useState<any>(null);
   const { connected, wallet } = useWallet();
   const [assets, setAssets] = useState<null | any>(null);
@@ -144,6 +149,17 @@ export default function Page() {
     setQuantity(e.target.value);
   }
   
+  function handleChangeSign(e:any) {
+    setSigned(e.target.value);
+  }
+
+
+  async function submitInputTx() {
+    console.log('signedTxInput : ', signedInput)
+    const txHash = await wallet.submitTx(signedInput);
+    console.log('submitnTx: ',JSON.stringify(txHash, null, 2)) 
+    }
+
 async function buildTx() {
   const tx = new Transaction({ initiator: wallet })
   .sendLovelace(
@@ -159,6 +175,10 @@ async function buildTx() {
   }
 
   async function buildTxToken() {
+    const utxos = await wallet.getUtxos();
+    const costLovelace = '10000000';
+    const selectedUtxos = largestFirst(costLovelace, utxos, true);
+    console.log(selectedUtxos);
     const tx = new Transaction({ initiator: wallet })
     .sendLovelace(
       addressInput,
@@ -182,6 +202,7 @@ async function buildTx() {
     }
 
   const [data, setData] = useState([]);
+  const [hideMenuList, setHideMenuList] = useState(true);
 
   const handleUpload = (e:any) => {
     let file = e.target.files[0];
@@ -269,7 +290,30 @@ async function buildTx() {
       console.log(boole)
     }
 
-    
+    const [showTokenImg, setshowTokenImg] = useState()
+    let displayData
+    async function checkTokenIMG() {
+      console.log('checkTokenIMG function')
+      const urlFe = 'https://preprod.koios.rest/api/v0/asset_info?_asset_policy=9772ff715b691c0444f333ba1db93b055c0864bec48fff92d1f2a7fe&_asset_name=5368656e5f746573744d6963726f555344'
+      //const assetFingerPrint = 'ce5b9e0f8a88255b65f2e4d065c6e716e9fa9a8a86dfb86423dd1ac0'
+      const response = await fetch(urlFe)
+      const responseData = await response.json()
+      console.log(responseData[0].token_registry_metadata.logo)
+      const tokenLogo = responseData[0].token_registry_metadata.logo
+      displayData = 'data:image/png;base64,'+tokenLogo
+      console.log(responseData)
+      setshowTokenImg(displayData)
+      setHideMenuList(!hideMenuList);
+      
+        // console.log(responseData[0].token_registry_metadata.logo);
+        // setshowTokenImg(displayData)
+ 
+      //const testFetch = await fetch('https://preprod.koios.rest/api/v0/asset_info?_asset_policy=ce5b9e0f8a88255b65f2e4d065c6e716e9fa9a8a86dfb86423dd1ac0&_asset_name=44494e47')
+      //console.log('fetch', testFetch)
+
+    //console.log('Token : ', assetFingerFetch)
+    // return 
+    }
 
   return (
 <div id="cent">
@@ -281,8 +325,7 @@ async function buildTx() {
           {assets ? (
             <pre>
               <code className="language-js">
-                {JSON.stringify(getWalletBalance())}
-                
+                {JSON.stringify(getWalletBalance())}  
               </code>
             </pre>
           ) : (
@@ -300,6 +343,18 @@ async function buildTx() {
             
                 </div>
             <br></br><br></br>
+            <h1>Submit input signed</h1>
+            <div className="h3">
+              <h3>SignedTx: {signedInput}</h3>
+              <span className="input">
+              <input type="text" id="signedInput" placeholder="signedTx" onChange={handleChangeSign} />
+              <span></span>
+              </span>
+            </div>
+            <button type="button" style={{}} onClick={async () => submitInputTx() }>input Submit Tx</button>
+
+
+
             <h1>Stake to ARARE (preprod)</h1>
             <button type="button" id="button" style={{}} onClick={async () => stakeWallettoARARE() }>Stake to ARARE</button>
             <button type="button" id="button" style={{}} onClick={async () => getRegStatus('stake_test1up9vfd6tgyudjrajnz7ys289l0mu5udfe0d6pxsw6d6zhuglxqx70') }>Reg status</button>
@@ -337,7 +392,11 @@ async function buildTx() {
               <span className="input">
                 <input type="number" id="lovelace" placeholder="1 SHEN" onChange={handleChangeQuantity}></input>
                 <span></span>
-              </span>  
+              </span>
+              <button type="button" class="bn632-hover bn19" style={{}} onClick={async () => checkTokenIMG() }>Check Token Image</button>
+              <div style={{width:50}}>
+              <img src={showTokenImg} width="100%"/>
+              </div>
             </div>
             <button type="button" class="bn632-hover bn19" style={{}} onClick={async () => buildTxToken() }>Build Tx Token</button>
             <br/>

@@ -47,7 +47,7 @@
     // we don't animate box-shadow directly as that can't be done on the GPU, only animate opacity and transform for high performance animations.
     span {
       
-      transform: scale(.993, .94); // scale it down just a little bit
+      transform: scale(.7, .94); // scale it down just a little bit
       transition: transform .5s, opacity .25s;
       opacity: 0; // is hidden by default
       
